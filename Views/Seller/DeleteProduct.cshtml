@@ -1,0 +1,56 @@
+﻿@model InternalProject.Models.ProductVM
+
+@{
+    ViewBag.Title = "DeleteProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Product</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discountPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discountPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imgUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imgUrl)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        //@Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.productID)
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            @Html.ActionLink("Back to List", "Products", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

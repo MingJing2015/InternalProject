@@ -1,0 +1,158 @@
+﻿@model InternalProject.Models.CheckoutVM
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Checkout Products</h2>
+@*<div>
+    <hr />
+    <a href="~/User/Cart" class="btn btn-default">Back to Cart</a>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+    </dl>
+    <h4>Shipping Address</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+    </dl>
+    <hr />
+</div>*@
+
+<div>
+    
+    <h4>Products to Checkout</h4>
+    <dl class="dl-horizontal">
+        @{
+            int productsCount = Model.products.Count();
+            for (int item = 0; item < productsCount; item++)
+            {
+                <dt>
+                    @Html.DisplayNameFor(_ => Model.products[item].productName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(_ => Model.products[item].quantity) of
+                    @Html.DisplayFor(_ => Model.products[item].productName)
+                </dd>
+            }
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.subtotal)
+        </dt>
+        <dd>
+            $<strong>@Html.DisplayFor(model => model.subtotal)</strong>
+        </dd>
+        <dt>
+            $@Html.DisplayNameFor(model => model.gst)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.gst)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.pst)
+        </dt>
+        <dd>
+            $@Html.DisplayFor(model => model.pst)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.total)
+        </dt>
+        <dd>
+            $<strong>@Html.DisplayFor(model => model.total)</strong>
+        </dd>
+    </dl>
+
+    <a href="~/User/Cart" class="btn btn-default">Back to Cart</a>
+    <div id="paypal-button" class="btn"></div>
+</div>
+
+@*<p>
+    <a href="~/User/EditCheckout" class="btn btn-default">Edit Billing Info</a>
+    <a href="~/User/Success" class="btn btn-default">Confirm Order</a>
+</p>*@
+
+
+
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+<script>
+    var domain = window.location.pathname;
+    domain = domain.substr(0,domain.lastIndexOf('/'));
+    paypal.Button.render({
+
+        env: 'sandbox', // Optional: specify 'sandbox' environment
+
+        client: {
+            sandbox: 'AeD6PumiO05KenRRmr7ephM6k__1jEeezKewF2Wf511SjzNmBKk-getOQZwV0CBgL8diLQW7YZKqCVrn'
+        },
+
+        payment: function () {
+
+            var env = this.props.env;
+            var client = this.props.client;
+
+            return paypal.rest.payment.create(env, client, {
+                transactions: [
+                    {
+                        amount: { total: '@Html.DisplayFor(model => model.total)', currency: 'CAD' }
+                    }
+                ]
+            });
+        },
+
+        commit: true, // Optional: show a 'Pay Now' button in the checkout flow
+
+        onAuthorize: function (data, actions) {
+
+            // Optional: display a confirmation page here
+
+            return actions.payment.execute().then(function () {
+                // Show a success page to the buyer
+                window.location.href = domain+'/Success';
+            });
+        },
+
+        onCancel: function (data, actions) {
+            // Show a cancel page or return to cart
+            window.location.href = domain+'/Cart';
+        }
+
+    }, '#paypal-button');
+</script>

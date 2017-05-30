@@ -1,0 +1,51 @@
+﻿@model IEnumerable<InternalProject.Models.ProductVM>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product</h2>
+
+<p>
+    @Html.ActionLink("Add Product", "AddProduct", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-default" }) 
+</p>
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.discountPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img class="myImg img-thumbnail img-responsive" width="70" height="70" src="@Html.Raw(item.imgUrl)" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.discountPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditProduct", new { productID = item.productID }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Details", "DetailProduct", new { id = item.productID }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "DeleteProduct", new { productID = item.productID }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,84 @@
+﻿@model InternalProject.Models.ProductVM
+
+@{
+    ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product Details</h2>
+
+@using (Html.BeginForm("EditProduct", "Seller", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    // @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.productID)
+        @Html.HiddenFor(model => model.imgUrl)
+
+        <img class="myImg img-thumbnail img-responsive" width="250" src="http://dakotajang.me/binarybase/Images/@Html.Raw(Model.imgUrl)" style="height:160px;" />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.manufacturer, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.manufacturer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.manufacturer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.vendor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.vendor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.vendor, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.summary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.summary, new { @class = "form-control", @rows="5" } )
+                @Html.ValidationMessageFor(model => model.summary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.discountPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.discountPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.discountPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="imageFile" class="control-label col-md-2">Change Image</label>
+            <div class="col-md-10">
+                <input type="file" name="imageFile" id="imageFile" class="form-control text-box single-line" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+                @Html.ActionLink("Back to List", "Products", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}
+

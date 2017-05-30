@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Binary Base</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+
+                <a href="~/Home/Index" class="navbar-brand" style="padding:0;"><img src="~/images/logo.png" alt="">&nbsp;</a>
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                @Html.ActionLink(" Binary Base", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color:white;" })
+
+            </div>
+            @if (!Request.IsAuthenticated)   // For Guest user : 
+            {
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    @*<li><a href="~/Home/Index"><span class="glyphicon glyphicon-home"></span> Home<span class="sr-only">(current)</span></a></li>*@
+                    @*<li><a href="~/Home/DesignDocument" class="right"><span class="glyphicon glyphicon-pencil"></span> Design Document</a></li>*@
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                        {
+                            <div class="col-lg-3  col-lg-3 col-xs-2 hidden-xs navbar-form navbar-left clearfix">
+                                <div class="input-group">
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control" placeholder="Search for...">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </li>
+                    @{
+                        // For Show Guest user on menu bar
+                        string userName = @HttpContext.Current.User.Identity.Name;
+                        if (userName.Length <= 0)
+                            userName = "Guest";
+
+                        <li><a href="#" style="color: red">Hello, @Html.Raw(userName) !</a></li>
+                    }
+                    @*<li><a href="~/Home/Cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>*@
+                    <li><a href="~/Home/Logout"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+            }
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Hello, @HttpContext.Current.User.Identity.Name!</a></li>
+                        <li><a href="~/Admin/UsersList"><span class="glyphicon glyphicon-glyphicon glyphicon-star"></span> Users</a></li>
+                        <li><a href="~/Admin/SellersList"><span class="glyphicon glyphicon-glyphicon glyphicon-gift"></span> Sellers</a></li>
+                        <li><a href="~/Admin/ProductsList"><span class="glyphicon glyphicon-glyphicon glyphicon-th"></span> Products</a></li>
+                        <li><a href="~/Home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </div>
+            }
+            @if (Request.IsAuthenticated && User.IsInRole("Seller"))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @*<form class="navbar-form navbar-left clearfix">
+                                <div class="form-group col-xs-5 col-sm-10">
+                                    <input type="text" class="form-control col-xs-12 col-sm-12" placeholder="Search">
+                                </div>
+                                <a href="~/Seller/Search" class="btn btn-default glyphicon glyphicon-search pull-left"></a>
+                            </form>*@
+                            @using (Html.BeginForm("Search", "Seller", FormMethod.Post))
+                            {
+                                <div class="col-lg-3  col-lg-3 col-xs-2 hidden-xs navbar-form navbar-left clearfix">
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <input type="text" name="search" class="form-control" placeholder="Search for...">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </li>
+                        <li><a href="~/Seller/SellerProfile" style="color: yellow">Hello, @HttpContext.Current.User.Identity.Name!</a></li>
+
+                        <li><a href="~/Seller/SellerProfile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                        <li><a href="~/Seller/Products"><span class="glyphicon glyphicon-glyphicon glyphicon-th"></span> Products</a></li>
+                        <li><a href="~/Home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </div>
+            }
+            @if (Request.IsAuthenticated && User.IsInRole("User"))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @using (Html.BeginForm("Search", "User", FormMethod.Post))
+                            {
+                                <div class="col-lg-3  col-lg-3 col-xs-2 hidden-xs navbar-form navbar-left clearfix">
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <input type="text" name="search" class="form-control" placeholder="Search for...">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </li>
+                        <!-- For Update Password, stop using, here has usename just !! you can update at profile  -->
+                        @*<li><a href="~/Home/UpdatePas sword?userName=@HttpContext.Current.User.Identity.Name" style="color: blueviolet">Hello, @HttpContext.Current.User.Identity.Name!</a></li>*@
+                        <li><a href="~/User/UserProfile" style="color: salmon">Hello, @HttpContext.Current.User.Identity.Name!</a></li>
+                        <li><a href="~/User/UserProfile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                        <li><a href="~/User/PurchaseHistory"><span class="glyphicon glyphicon-list-alt"></span> Purchase History</a></li>
+                        <li><a href="~/User/Cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                        <li><a href="~/Home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+    
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Binary Base <a href="~/Home/DesignDocument" class="pull-right">Design Document</a></p>
+            <p>@Html.Raw("Latest Build: " + File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location).ToString())</p>
+        </footer>
+    </div>
+
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"
+            integrity="sha256-C6CB9UYIS9UJeqinPHWTHVqh/E1uhG5Twh+Y5qFQmYg="
+            crossorigin="anonymous"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location;
+        $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+        $('ul.nav a').filter(function() {
+             return this.href == url;
+        }).parent().addClass('active');
+    });
+
+
+</script> 

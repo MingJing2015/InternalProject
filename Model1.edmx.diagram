@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9048dcdeb25647febb875a6ba8ddb238" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.C__MigrationHistory" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.Account" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.Address" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.AspNetRole" Width="1.5" PointX="9.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.AspNetUserClaim" Width="1.5" PointX="14.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.AspNetUserLogin" Width="1.5" PointX="14.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.AspNetUser" Width="1.5" PointX="12" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.Cart" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.OrderTable" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.Product" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.ProductOrder" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.sysdiagram" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.UserTable" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_110727_binarybaseModel.Vendor" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__Address__userNam__7B0717E7" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__UserTable__userN__782AAB3C" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__Vendor__userName__754E3E91" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__OrderTabl__addre__01B41576" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__Cart__productID__08611305" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__Cart__userName__0955373E" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__OrderTabl__userN__00BFF13D" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__ProductOr__order__04908221" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__Product__userNam__7DE38492" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.FK__ProductOr__produ__0584A65A" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_110727_binarybaseModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

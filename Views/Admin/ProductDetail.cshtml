@@ -1,0 +1,69 @@
+﻿@model InternalProject.Models.ProductVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product Details</h2>
+<div class="row">
+    <div>
+        <img class="col-sm-6" src="@Html.DisplayFor(model => model.imgUrl)" />
+    </div>
+    <div class="col-sm-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.manufacturer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.manufacturer)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.vendor)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.vendor)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.summary)
+            </dt>
+
+            <dd>
+                @Html.Raw(Html.Encode(Html.DisplayFor(model => model.summary)).Replace("\n", "<br />"))
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.discountPrice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.discountPrice)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div>
+<p>
+    <a href="~/Admin/ProductsList" class="btn btn-default">Back</a>
+</p>
+</div>

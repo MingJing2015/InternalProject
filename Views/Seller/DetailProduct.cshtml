@@ -1,0 +1,68 @@
+﻿@model InternalProject.Models.ProductVM
+
+@{
+    ViewBag.Title = "DetailProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail Product</h2>
+
+<div>
+    <hr />
+    <img class="myImg img-thumbnail img-responsive" width="250" src="@Html.Raw(Model.imgUrl)" style="height:160px;" />
+
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manufacturer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manufacturer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vendor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vendor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discountPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discountPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index",new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-default" })
+</p>

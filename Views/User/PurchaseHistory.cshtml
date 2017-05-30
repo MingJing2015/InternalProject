@@ -1,0 +1,47 @@
+﻿@model IEnumerable<InternalProject.Models.OrderVM>
+
+@{
+    ViewBag.Title = "Purchase History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Purchase History</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.orderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.summary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.timeStamp)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.orderId)
+        </td>
+        <td>
+            @{
+                int productsCount = item.summary.Count();
+                for (int i = 0; i < productsCount; i++)
+                {
+                    @Html.DisplayFor(modelItem => item.summary[i].quantity)
+                    @Html.Raw(" &times; ")
+                    @Html.DisplayFor(modelItem => item.summary[i].productName)
+                    <br />
+                }
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.timeStamp)
+            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })*@ 
+        </td>
+    </tr>
+}
+
+</table>

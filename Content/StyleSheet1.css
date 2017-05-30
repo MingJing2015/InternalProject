@@ -1,0 +1,25 @@
+﻿body {
+}
+
+#about {
+	background-color: #eee;
+	padding: 40px 15px;
+}
+#about a {
+	color: #0059b2;
+}
+#about .about {
+	background-color: #fff;
+	box-shadow: 2px 2px 3px #ccc;
+}
+#about h3 {
+	color: #333;
+	font-size: 18px;
+	border-bottom: 1px solid #eee;
+	padding: 20px 0;
+	margin: 0 0 10px 0;
+}
+#about p {
+	line-height: 2;
+	font-size: 13px;
+}

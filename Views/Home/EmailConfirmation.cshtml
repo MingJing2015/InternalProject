@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "EmailConfirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Email Confirmation</h2>
+<hr />
+
+@*<p>@TempData["message"]</p>*@
+
+<div class="alert alert-success" role="alert">
+    <h4>Your account has been created. Please @Html.ActionLink("click here to login", "Login", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })</h4>
+</div>

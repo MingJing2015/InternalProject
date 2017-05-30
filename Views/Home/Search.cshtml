@@ -1,0 +1,56 @@
+﻿@model IEnumerable<InternalProject.Models.ProductVM>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.itemNumber == 0)
+{
+    <br />
+    <h4>The item you are looking for cannot be found.</h4>
+    <p>But here are some other products you may be interested in.</p>
+    <br />
+}
+else
+{
+    <br />
+    <h3>We found @Html.Raw(ViewBag.itemNumber) items for you:</h3>
+    <br />
+}
+
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.discountPrice)
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><img class="pull-left" width="100" src="@Html.Raw(item.imgUrl)" /></td>
+            <td>
+                @Html.ActionLink(item.name.ToString(), "Details", new { id = item.productID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.discountPrice)
+            </td>
+            <td>
+                <a href="~/Home/Cart" class="btn btn-success">Add to Cart</a>
+            </td>
+        </tr>
+    }
+</table>

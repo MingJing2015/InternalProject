@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "WebApi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Web API Documentation</h2>
+<hr />
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 hidden-sm hidden-xs">
+                <br />
+                <div class="list-group">
+                    <a class="list-group-item" href="~/Home/WebApi/#10">1. Documentation</a>
+                </div>
+            </div>
+            <div class="col-md-9 about">
+                <a name="10"></a>
+                <h3 class="bg-info">Documentation</h3>
+                <dl>
+                    <dt>/api/Products/{guid}</dt>
+                    <dd>Gets all products from specified vendor. Vendors can check their {id_key} from  their profile page.
+                    <!--http://www.itadmintools.com/2013/06/javascript-code-to-html-converter.html-->
+                        <div style="BORDER: #cccccc 1px dashed; PADDING: 5px; WIDTH: 95%; BACKGROUND: #f0f0f0; COLOR: #000000; FONT-SIZE: 12px; OVERFLOW: auto; height:auto">
+
+Sample jQuery code that takes input with id='id' of guid of the vendor and gets the data of the vendor's products and replaces paragraph tag with id="response" with a JSON object response.
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input id="id" value="34661167-b39c-40a0-962e-ffac618d6f7c"/&gt;
+    &lt;p id="response"&gt;...&lt;/p&gt;
+    &lt;script&gt;
+        var serviceUrl = 'http://www.dakotajang.me/binarybase/api/Products/';
+        function sendRequest() {
+            var key = $('#id').val();
+            $.ajax({
+                url: serviceUrl + key
+            }).done(function (data) {
+                console.log(data);
+                $('#response').text(JSON.stringify(data));
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                $('#response').text(jqXHR.responseText || textStatus);
+            });
+        }
+        onload = function () {
+            sendRequest();
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

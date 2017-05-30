@@ -1,0 +1,75 @@
+﻿@model IEnumerable<InternalProject.Models.SellerVM>
+
+@{
+    ViewBag.Title = "SellersList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Sellers</h2>
+<div class="container">
+    <div class="row">
+        @*<div class="col-lg-9 col-md-9 col-sm-6 col-sx-6">
+            <p>
+                @Html.ActionLink("Create New", "SellerCreate", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-default" })
+            </p>
+        </div>*@
+        <div class="col-lg-3 col-md-3 col-sm-6 col-sx-6">
+            @using (Html.BeginForm())
+            {
+                <div hidden-xs">
+                    <div class="input-group">
+                        <div class="input-group">
+                            @*<input type="text" name="search" class="form-control" placeholder="Search for...">*@
+                            @Html.TextBox("SearchString", null, new { placeholder = "Search for sellers...", @class = "form-control" })
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vendor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vendor)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "SellerEdit", new { controller = "Admin", username = item.username }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Details", "SellerDetail", new { controller = "Admin", username = item.username }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "SellerDelete", new { controller = "Admin", username = item.username }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>
+

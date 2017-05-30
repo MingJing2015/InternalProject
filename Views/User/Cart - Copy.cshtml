@@ -1,0 +1,119 @@
+﻿@model IEnumerable<InternalProject.Models.CartItemVM>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Order</h2>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.discountPrice)
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @using (Html.BeginForm("DeleteItems", "User"))
+            {
+            @*@Html.AntiForgeryToken()*@
+            <div class="form-actions no-color">
+                <input type="submit" value="Remove" class="btn btn-default" />
+            </div>
+            }
+        </td>
+        <td>
+            <img class="pull-left" width="100" src="@Html.Raw(item.imgUrl)" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            <input type="number" name="qty" value="@Html.Raw(item.quantity)"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.discountPrice)
+        </td>
+    </tr>
+}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Product Total</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Shipping Total</td>
+        <td>Free</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Sub Total</b></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Estimated PST/QST</td>
+        <td>$42.16</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Estimated GST</td>
+        <td>$30.11</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Total</b></td>
+        <td><b>$572.26</b></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="~/User/Index" class="btn btn-default">Continue Shopping</a>
+        </td>
+        <td>
+            <a href="~/User/Checkout" class="btn btn-default">Checkout</a>
+        </td>
+    </tr>
+</table>
+
+

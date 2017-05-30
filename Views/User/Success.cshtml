@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thank you for your order</h2>
+<h3>Order number is: @Html.Raw(ViewBag.orderID)</h3>
+<p>Thank you for shopping with us.</p>
+
+<a href="~/User/Index" class="btn btn-default">Back To Browsing</a>

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<InternalProject.Models.ProductVM>
+
+@{
+    ViewBag.Title = "ProductsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-6 col-sx-6">
+            <h2>Product </h2>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-sx-6" style="margin-top:18px">
+        @using (Html.BeginForm())
+        {
+            <div hidden-xs">
+                <div class="input-group">
+                    <div class="input-group">
+                        @*<input type="text" name="search" class="form-control" placeholder="Search for...">*@
+                        @Html.TextBox("SearchString", null, new { placeholder = "Search for products...", @class = "form-control" })
+                        <div class="input-group-btn">
+                            <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+    </div>
+</div>
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.vendor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.discountPrice)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vendor)
+                    </td>
+                    <td>
+                        <s>@Html.DisplayFor(modelItem => item.price)</s>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.discountPrice)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "ProductEdit", new { controller = "Admin", productID = item.productID }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Details", "ProductDetail", new { controller = "Admin", productID = item.productID }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Delete", "ProductDelete", new { controller = "Admin", productID = item.productID }, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+            }
+
+        </table>

@@ -1,0 +1,79 @@
+﻿@model InternalProject.Models.CartVM
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Order</h2>
+
+@using (Html.BeginForm("Cart", "User", FormMethod.Post, new { id = "myForm" }))
+{
+    <table class="table">
+        <tr>
+            <th></th>
+            <th></th>
+            <th>
+                Product
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Discount price
+            </th>
+        </tr>
+        @{
+            int productsCount = Model.Products.Count();
+            for (int item = 0; item < productsCount; item++)
+            {
+                <tr>
+                    @Html.HiddenFor(_ => Model.Products[item].productID)
+                    @Html.HiddenFor(_ => Model.Products[item].price)
+                    @Html.HiddenFor(_ => Model.Products[item].discountPrice)
+                    @Html.HiddenFor(_ => Model.Products[item].productName)
+                    @Html.HiddenFor(_ => Model.Products[item].imgUrl)
+                    @Html.HiddenFor(_ => Model.Products[item].userName)
+                    
+                    <td>
+                        <a class="btn btn-danger" href="~/User/DeleteItem/@Html.Raw(Model.Products[item].productID)">Remove</a>
+                    </td>
+                    <td>
+                        <img class="myImg img-thumbnail img-responsive" width="100" src="@Html.Raw(Model.Products[item].imgUrl)" style="height:40px;" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => Model.Products[item].productName)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => Model.Products[item].price)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(_ => Model.Products[item].quantity, new { type = "number", min = "1" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => Model.Products[item].discountPrice)
+                    </td>
+                </tr>
+            }
+            }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Subtotal: </td>
+            @{
+                var subtotal = ViewBag.subtotal;
+                <td><strong>@Html.DisplayFor(modelItem => subtotal, "MyDecimalTemplate")</strong></td>
+             }
+        </tr>
+    </table>
+    <p class="text-success">@Html.Raw( ViewBag.UpdateCart )</p>
+    <input class="btn btn-default" type="submit" value="Update Cart" />
+    <a class="btn btn-default" href="~/Home/Index">Continue Shopping </a>
+    <a class="btn btn-info" href="~/User/Checkout">Check Out</a>
+}
